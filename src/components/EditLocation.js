@@ -16,6 +16,10 @@ const EditLocation = () => {
         image: "",
     });
 
+    const handleBack = () => {
+        navigate(-1); // Go back to the previous page in history
+    };
+
     useEffect(() => {
         const fetchLocationData = async () => {
             try {
@@ -134,12 +138,20 @@ const EditLocation = () => {
                         required
                     />
                 </div>
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-                >
-                    Update Location
-                </button>
+                <div className="flex justify-between items-center">
+                    <button
+                        onClick={handleBack}
+                        className="bg-gray-500 text-white py-2 px-4 rounded"
+                    >
+                        Буцах
+                    </button>
+                    <button
+                        type="submit"
+                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                    >
+                        Update Location
+                    </button>
+                </div>
             </form>
         </div>
     );

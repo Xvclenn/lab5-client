@@ -8,6 +8,7 @@ import AddLocation from "./components/AddLocation";
 import { HomePage } from "./components/HomePage";
 import EditLocation from "./components/EditLocation";
 import Navbar from "./components/Navbar";
+import LocationDetailPage from "./components/LocationDetail";
 
 const App = () => {
     const [user, setUser] = useState(() => {
@@ -17,13 +18,12 @@ const App = () => {
 
     return (
         <Router>
-            <Navbar />
+            <Navbar user={user} setUser={setUser} />
             <Routes>
                 <Route
                     path="/"
                     element={<HomePage user={user} setUser={setUser} />}
                 />
-
                 <Route path="/login" element={<Login setUser={setUser} />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/users" element={<UserList />} />
@@ -33,11 +33,15 @@ const App = () => {
                 />
                 <Route
                     path="/users/:id/locations/add"
-                    element={<AddLocation />}
+                    element={<AddLocation user={user} />}
                 />
                 <Route
                     path="/users/:userId/locations/edit/:locationId"
-                    element={<EditLocation />}
+                    element={<EditLocation user={user} />}
+                />
+                <Route
+                    path="/users/:userId/locations/:locationId"
+                    element={<LocationDetailPage />}
                 />
             </Routes>
         </Router>

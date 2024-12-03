@@ -1,4 +1,3 @@
-// AddLocation.js
 import React, { useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -12,11 +11,32 @@ const AddLocation = () => {
     const [long, setLong] = useState("");
     const [image, setImage] = useState("");
     const [showInputs, setShowInputs] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
+    // Basic validation function
+    const validateForm = () => {
+        if (!name || !description || !lat || !long || !image) {
+            return "Бүх талбарыг бөглөх ёстой.";
+        }
+        if (isNaN(lat) || isNaN(long)) {
+            return "Өндөр, уртрагын утгууд зөв байх ёстой.";
+        }
+        return "";
+    };
 
     const handleAddLocation = async (e) => {
         e.preventDefault();
 
-        // No need to generate an ID here; the backend will do it
+        const validationError = validateForm();
+        if (validationError) {
+            setErrorMessage(validationError);
+            return;
+        }
+
+        setLoading(true);
+        setErrorMessage("");
+
         const newLocation = {
             name,
             description,
@@ -33,6 +53,9 @@ const AddLocation = () => {
             navigate(`/users/${id}/locations`);
         } catch (error) {
             console.error("Error adding location:", error);
+            setErrorMessage("Байршил нэмэхэд алдаа гарлаа.");
+        } finally {
+            setLoading(false); // Stop loading
         }
     };
 
@@ -46,6 +69,11 @@ const AddLocation = () => {
             </button>
             {showInputs && (
                 <div className="grid grid-cols-1 gap-4 mb-6">
+                    {errorMessage && (
+                        <p className="text-red-500 text-center mb-4">
+                            {errorMessage}
+                        </p>
+                    )}
                     <input
                         type="text"
                         placeholder="Location Name"
@@ -88,9 +116,12 @@ const AddLocation = () => {
                     />
                     <button
                         onClick={handleAddLocation}
-                        className="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 transition w-full"
+                        className={`bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 transition w-full ${
+                            loading ? "opacity-50 cursor-not-allowed" : ""
+                        }`}
+                        disabled={loading}
                     >
-                        Байршил нэмэх
+                        {loading ? "Тамга хийх..." : "Байршил нэмэх"}
                     </button>
                 </div>
             )}
