@@ -7,10 +7,9 @@ export const HomePage = ({ user, setUser }) => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
-    const [error, setError] = useState(null); // Add an error state
+    const [error, setError] = useState(null);
     const [selectedUser, setSelectedUser] = useState(null);
-
-    // console.log(user.user);
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -19,25 +18,30 @@ export const HomePage = ({ user, setUser }) => {
                     "http://localhost:8000/api/users"
                 );
                 const data = response.data;
+                console.log(data);
+                console.log(token);
                 setUsers(data);
-                // console.log(data); // Logs the successful response
             } catch (error) {
                 console.error("Error fetching users:", error);
-                // You can set an error state here for displaying an error message to the user
                 setError("Failed to fetch users.");
             }
         };
         fetchUsers();
-    }, []);
+    }, [token]);
 
     useEffect(() => {
         if (id) {
             const fetchUserById = async () => {
                 try {
                     const res = await axios.get(
-                        `http://localhost:8000/api/users/${id}/locations`
+                        `http://localhost:8000/api/users/${id}/locations`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        }
                     );
-                    setSelectedUser(res.data); // Set the selected user's data
+                    setSelectedUser(res.data);
                     console.log(res.data);
                 } catch (error) {
                     setError("Failed to fetch user data.");
@@ -46,18 +50,18 @@ export const HomePage = ({ user, setUser }) => {
             };
             fetchUserById();
         }
-    }, [id]);
+    }, [id, token]);
 
     const handleLogout = () => {
-        setUser(null); // Clear user state
-        localStorage.removeItem("user"); // Remove user from localStorage
-        navigate("/login"); // Redirect to login page
+        setUser(null);
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        navigate("/login");
     };
 
     return (
         <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 py-8">
             <h1 className="text-4xl font-bold mb-4 text-slate-600">Лаб 5</h1>
-            {/* Display error if there is one */}
             {error && <p className="text-red-500 mb-4">{error}</p>}
             {user ? (
                 <div className="bg-white shadow-md rounded-lg p-6 max-w-md w-full text-center">

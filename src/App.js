@@ -9,6 +9,7 @@ import { HomePage } from "./components/HomePage";
 import EditLocation from "./components/EditLocation";
 import Navbar from "./components/Navbar";
 import LocationDetailPage from "./components/LocationDetail";
+import UnauthorizedPage from "./components/UnAuthorizedPage";
 
 const App = () => {
     const [user, setUser] = useState(() => {
@@ -43,6 +44,7 @@ const App = () => {
                     path="/users/:userId/locations/:locationId"
                     element={<LocationDetailPage />}
                 />
+                <Route path="/unauthorized" element={<UnauthorizedPage />} />
             </Routes>
         </Router>
     );

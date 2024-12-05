@@ -21,7 +21,6 @@ const Register = () => {
     });
     const navigate = useNavigate();
 
-    // Update the password requirements dynamically
     const checkPasswordRequirements = (password) => {
         setRequirements({
             length: password.length >= 6,
@@ -34,11 +33,10 @@ const Register = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        setError(""); // Clear any previous errors
+        setError("");
 
-        // Validate form
         if (!validateForm()) {
-            return; // Stop if form is invalid
+            return;
         }
 
         try {
@@ -47,7 +45,7 @@ const Register = () => {
                 password,
                 image,
             });
-            navigate("/login"); // Redirect to login page after successful registration
+            navigate("/login");
         } catch (error) {
             console.error("Registration failed:", error);
             if (error.response && error.response.data) {
@@ -61,9 +59,7 @@ const Register = () => {
         }
     };
 
-    // Validate form fields
     const validateForm = () => {
-        // Clear previous validation errors
         setValidationError("");
 
         if (!username) {
@@ -88,7 +84,6 @@ const Register = () => {
             return false;
         }
 
-        // Check if the image is a valid URL (basic check)
         try {
             new URL(image);
         } catch (_) {

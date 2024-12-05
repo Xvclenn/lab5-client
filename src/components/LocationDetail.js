@@ -3,18 +3,23 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 const LocationDetailPage = () => {
-    const { userId, locationId } = useParams(); // Assuming the route has userId and locationId params
+    const { userId, locationId } = useParams();
     const navigate = useNavigate();
     const [location, setLocation] = useState(null);
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const token = localStorage.getItem("token");
 
-    // Fetch location details from the server
     useEffect(() => {
         setLoading(true);
         axios
             .get(
-                `http://localhost:8000/api/users/${userId}/locations/${locationId}`
+                `http://localhost:8000/api/users/${userId}/locations/${locationId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
             )
             .then((response) => {
                 setLocation(response.data);
@@ -26,9 +31,8 @@ const LocationDetailPage = () => {
             .finally(() => {
                 setLoading(false);
             });
-    }, [userId, locationId]);
+    }, [userId, locationId, token]);
 
-    // Handle back button navigation
     const handleBack = () => {
         navigate(`/users/${userId}/locations`);
     };

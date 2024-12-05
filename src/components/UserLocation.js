@@ -10,13 +10,19 @@ const UserLocations = ({ user }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [deleting, setDeleting] = useState(false);
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
-        console.log("User ID:", id); // Debugging line to ensure id is passed correctly
+        console.log("User ID:", id);
         const fetchUserLocations = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:8000/api/users/${id}/locations`
+                    `http://localhost:8000/api/users/${id}/locations`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
                 );
                 setLocations(response.data);
             } catch (error) {
@@ -32,7 +38,7 @@ const UserLocations = ({ user }) => {
         } else {
             setError("Invalid user ID.");
         }
-    }, [id]);
+    }, [id, token]);
 
     const handleEdit = (locationId) => {
         navigate(`/users/${id}/locations/edit/${locationId}`);
@@ -44,18 +50,24 @@ const UserLocations = ({ user }) => {
         );
 
         if (!isConfirmed) {
-            return; // Exit if user cancels the action
+            return;
         }
         setDeleting(true);
         try {
             await axios.delete(
-                `http://localhost:8000/api/users/${id}/locations/${locationId}`
+                `http://localhost:8000/api/users/${id}/locations/${locationId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
             );
             setLocations(
                 locations.filter((location) => location._id !== locationId)
             );
         } catch (error) {
             setError("Error deleting location. Please try again.");
+            navigate("/unauthorized");
             console.error("Error deleting location:", error);
         } finally {
             setDeleting(false);
@@ -79,7 +91,6 @@ const UserLocations = ({ user }) => {
                         {locations.map((location) => (
                             <li key={location._id}>
                                 {" "}
-                                {/* Ensure _id is used */}
                                 <div className="border border-gray-200 hover:shadow-lg transition rounded-md p-4 mb-4 shadow-sm bg-white">
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-10 items-center">
@@ -133,7 +144,9 @@ const UserLocations = ({ user }) => {
                         ))}
                     </ul>
                 ) : (
-                    <p className="text-gray-600">Байршил олдсонгүй.</p>
+                    <p className="text-gray-600">
+                        Одоогоор байршил бүртгүүлээгүй байна.
+                    </p>
                 )}
             </div>
         </div>

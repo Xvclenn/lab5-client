@@ -15,6 +15,7 @@ const EditLocation = () => {
         long: "",
         image: "",
     });
+    const token = localStorage.getItem("token");
 
     const handleBack = () => {
         navigate(-1); // Go back to the previous page in history
@@ -24,20 +25,26 @@ const EditLocation = () => {
         const fetchLocationData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:8000/api/users/${userId}/locations/${locationId}`
+                    `http://localhost:8000/api/users/${userId}/locations/${locationId}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
                 );
                 setLocation(response.data);
                 setFormData(response.data); // Populate form data with fetched location data
             } catch (error) {
                 setError("Error fetching location data. Please try again.");
                 console.error("Error fetching location data:", error);
+                navigate("/unauthorized");
             } finally {
                 setLoading(false);
             }
         };
 
         fetchLocationData();
-    }, [userId, locationId]);
+    }, [userId, locationId, token, navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,9 +56,14 @@ const EditLocation = () => {
         try {
             await axios.put(
                 `http://localhost:8000/api/users/${userId}/locations/${locationId}`,
-                formData
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
             );
-            navigate(`/users/${userId}/locations`); // Redirect back to user locations after update
+            navigate(`/users/${userId}/locations`);
         } catch (error) {
             setError("Error updating location. Please try again.");
             console.error("Error updating location:", error);

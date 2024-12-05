@@ -1,3 +1,4 @@
+//components/Login.js
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,16 +8,15 @@ const Login = ({ setUser }) => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const [validationError, setValidationError] = useState(""); // Validation error state
+    const [validationError, setValidationError] = useState("");
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setError(""); // Clear any previous errors
-        setValidationError(""); // Clear validation errors
+        setError("");
+        setValidationError("");
 
-        // Validate form fields
         if (!username || !password) {
             setValidationError("Хэрэглэгчийн нэр болон нууц үг оруулна уу.");
             setLoading(false);
@@ -32,13 +32,18 @@ const Login = ({ setUser }) => {
                 }
             );
 
-            setUser(response.data); // Set user data to global state (if required)
-            localStorage.setItem("user", JSON.stringify(response.data)); // Save user info to localStorage
-            navigate("/"); // Navigate to home page on successful login
+            const { token, user } = response.data;
+
+            localStorage.setItem("token", token);
+
+            localStorage.setItem("user", JSON.stringify(user));
+
+            setUser(response.data);
+            localStorage.setItem("user", JSON.stringify(response.data));
+            navigate("/");
         } catch (error) {
             console.error("Login failed:", error);
 
-            // Check for specific error response from the backend
             if (error.response && error.response.data) {
                 setError(
                     error.response.data.error || "Нэвтрэхэд алдаа гарлаа."
@@ -47,7 +52,7 @@ const Login = ({ setUser }) => {
                 setError("Нэвтрэхэд алдаа гарлаа.");
             }
         } finally {
-            setLoading(false); // Stop loading state after login attempt
+            setLoading(false);
         }
     };
 
@@ -59,7 +64,6 @@ const Login = ({ setUser }) => {
                 {validationError && (
                     <p className="text-red-500 mb-4">{validationError}</p>
                 )}{" "}
-                {/* Display validation error */}
                 <form
                     onSubmit={handleLogin}
                     className="bg-white shadow-md rounded px-8 py-6 w-96"
@@ -73,7 +77,6 @@ const Login = ({ setUser }) => {
                             value={username}
                             placeholder="Хэрэглэгчийн нэр"
                             onChange={(e) => setUsername(e.target.value)}
-                            // required
                             className={`${
                                 !validationError
                                     ? "border-gray-300"
@@ -90,7 +93,6 @@ const Login = ({ setUser }) => {
                             value={password}
                             placeholder="Нууц үг"
                             onChange={(e) => setPassword(e.target.value)}
-                            // required
                             className={`${
                                 !validationError
                                     ? "border-gray-300"
@@ -116,7 +118,6 @@ const Login = ({ setUser }) => {
                         </button>
                     </div>
                 </form>
-                {/* Register Button */}
                 <p className="mt-4">
                     <span className="text-gray-700">
                         Хэрэв бүртгүүлээгүй бол?

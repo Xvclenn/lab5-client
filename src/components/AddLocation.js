@@ -9,12 +9,14 @@ const AddLocation = () => {
     const [description, setDescription] = useState("");
     const [lat, setLat] = useState("");
     const [long, setLong] = useState("");
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState(
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Mongolia.svg/1200px-Flag_of_Mongolia.svg.png"
+    );
     const [showInputs, setShowInputs] = useState(false);
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const token = localStorage.getItem("token");
 
-    // Basic validation function
     const validateForm = () => {
         if (!name || !description || !lat || !long || !image) {
             return "Бүх талбарыг бөглөх ёстой.";
@@ -48,14 +50,20 @@ const AddLocation = () => {
         try {
             await axios.post(
                 `http://localhost:8000/api/users/${id}/locations`,
-                newLocation
+                newLocation,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
             );
             navigate(`/users/${id}/locations`);
         } catch (error) {
             console.error("Error adding location:", error);
             setErrorMessage("Байршил нэмэхэд алдаа гарлаа.");
+            navigate("/unauthorized");
         } finally {
-            setLoading(false); // Stop loading
+            setLoading(false);
         }
     };
 
