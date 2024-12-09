@@ -46,7 +46,7 @@ const LocationDetailPage = () => {
     }
 
     return (
-        <div className="bg-white p-10 m-10 shadow-md rounded-lg">
+        <div className="bg-[#FDF7F4] p-10 m-10 shadow-md rounded-lg">
             <button
                 onClick={handleBack}
                 className="bg-gray-500 text-white py-2 px-4 rounded mb-6"

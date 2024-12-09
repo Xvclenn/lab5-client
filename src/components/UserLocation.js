@@ -77,13 +77,13 @@ const UserLocations = ({ user }) => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 py-8 flex flex-col items-center">
+        <div className="min-h-screen bg-[#FDF7F4] py-8 flex flex-col items-center">
             <h1 className="text-3xl font-semibold mb-6 text-gray-700">
                 Хэрэглэгчийн байршил
             </h1>
             {user && <AddLocation userId={id} setLocations={setLocations} />}
 
-            <div className="bg-white mt-10 p-6 shadow-md rounded-lg w-full max-w-lg">
+            <div className="bg-[#997C70] mt-10 p-6 shadow-md rounded-lg w-full max-w-lg">
                 {loading ? (
                     <p>Loading...</p>
                 ) : error ? (
@@ -93,7 +93,7 @@ const UserLocations = ({ user }) => {
                         {locations.map((location) => (
                             <li key={location._id}>
                                 {" "}
-                                <div className="border border-gray-200 hover:shadow-lg transition rounded-md p-4 mb-4 shadow-sm bg-white">
+                                <div className="border border-gray-200 hover:shadow-lg transition rounded-md p-4 mb-4 shadow-sm bg-[#FDF7F4]">
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-10 items-center">
                                             <Link
@@ -121,7 +121,7 @@ const UserLocations = ({ user }) => {
                                                 onClick={() =>
                                                     handleEdit(location._id)
                                                 }
-                                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                                                className="bg-[#997C70] text-white px-4 py-2 rounded hover:bg-[#7f503c] transition"
                                             >
                                                 Засах
                                             </button>
@@ -129,7 +129,7 @@ const UserLocations = ({ user }) => {
                                                 onClick={() =>
                                                     handleDelete(location._id)
                                                 }
-                                                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                                                className="bg-[#d43939] text-white px-4 py-2 rounded hover:bg-[#9f3939] transition"
                                                 disabled={deleting}
                                             >
                                                 {deleting
@@ -144,7 +144,7 @@ const UserLocations = ({ user }) => {
                         ))}
                     </ul>
                 ) : (
-                    <p className="text-gray-600">
+                    <p className="text-[#fff4ef]">
                         Одоогоор байршил бүртгүүлээгүй байна.
                     </p>
                 )}

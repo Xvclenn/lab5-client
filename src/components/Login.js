@@ -58,7 +58,7 @@ const Login = ({ setUser }) => {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+            <div className="flex flex-col items-center justify-center min-h-screen bg-[#FDF7F4]">
                 <h2 className="text-2xl font-semibold mb-4">Нэвтрэх</h2>
                 {error && <p className="text-red-500 mb-4">{error}</p>}
                 {validationError && (
@@ -66,10 +66,10 @@ const Login = ({ setUser }) => {
                 )}{" "}
                 <form
                     onSubmit={handleLogin}
-                    className="bg-white shadow-md rounded px-8 py-6 w-96"
+                    className="bg-[#997C70] shadow-md rounded px-8 py-6 w-96"
                 >
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
+                        <label className="block text-[#fffbfb] text-sm font-bold mb-2">
                             Хэрэглэгчийн нэр:
                         </label>
                         <input
@@ -85,7 +85,7 @@ const Login = ({ setUser }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
+                        <label className="block text-[#fffbfb] text-sm font-bold mb-2">
                             Нууц үг:
                         </label>
                         <input
@@ -104,7 +104,7 @@ const Login = ({ setUser }) => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
+                            className={`bg-[#4c6e3b] text-[#FDF7F4] px-4 py-2 rounded hover:bg-[#3e622d] transition ${
                                 loading ? "opacity-50 cursor-not-allowed" : ""
                             }`}
                         >
@@ -112,7 +112,7 @@ const Login = ({ setUser }) => {
                         </button>
                         <button
                             onClick={() => navigate("/")}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="bg-[#83685f] text-[#FDF7F4] px-4 py-2 rounded hover:bg-[#685752] transition"
                         >
                             Буцах
                         </button>
@@ -124,7 +124,7 @@ const Login = ({ setUser }) => {
                     </span>
                     <button
                         onClick={() => navigate("/register")}
-                        className="text-blue-500 hover:underline ml-1"
+                        className="text-[#4c6e3b] hover:underline ml-1"
                     >
                         Бүртгүүлэх
                     </button>

@@ -1,47 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
+    const navigate = useNavigate();
     return (
-        <nav className="bg-gray-800 shadow-lg sticky top-0">
-            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-                <div className="relative flex items-center justify-between h-16">
-                    <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                        {/* Mobile menu button*/}
+        <nav className="bg-[#A59D84] p-5 shadow-lg sticky top-0">
+            <div className="flex px-10 justify-between w-full items-center">
+                <Link
+                    to="/"
+                    className="text-[#FDF7F4] uppercase italic text-2xl font-bold"
+                >
+                    Лаборатори
+                </Link>
+
+                {!user ? (
+                    <div className="flex justify-center space-x-4">
                         <button
-                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                            aria-controls="mobile-menu"
-                            aria-expanded="false"
+                            onClick={() => navigate("/login")}
+                            className="bg-[#83685f] text-[#FDF7F4] px-4 py-2 rounded hover:bg-[#685752] transition"
                         >
-                            <span className="sr-only">Open main menu</span>
-                            <svg
-                                className="block h-6 w-6"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M4 6h16M4 12h16m-7 6h7"
-                                />
-                            </svg>
+                            Нэвтрэх
+                        </button>
+                        <button
+                            onClick={() => navigate("/register")}
+                            className="bg-[#66a657] text-[#FDF7F4] px-4 py-2 rounded hover:bg-[#4c9c3a] transition"
+                        >
+                            Бүртгүүлэх
                         </button>
                     </div>
-                    <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                        <div className="flex-shrink-0">
-                            <Link
-                                to="/"
-                                className="text-white text-2xl font-bold"
-                            >
-                                Lab5
-                            </Link>
-                        </div>
+                ) : (
+                    <div className="flex">
+                        <p className="p-5 text-xl text-[#24170f]">
+                            {user.user.username}.
+                        </p>
+                        <img
+                            src={user.user.image}
+                            alt="User"
+                            className="mx-auto w-14 h-14 bg-white border-2 border-[#24170f] p-2 rounded-full shadow-md"
+                        />
                     </div>
-                </div>
+                )}
             </div>
         </nav>
     );

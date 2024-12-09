@@ -96,18 +96,18 @@ const Register = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+            <div className="flex flex-col items-center justify-center min-h-screen bg-[#FDF7F4]">
                 <h2 className="text-2xl font-semibold mb-4">Бүртгүүлэх</h2>
-                {error && <p className="text-red-500 mb-4">{error}</p>}
+                {error && <p className="text-[#fffbfb] mb-4">{error}</p>}
                 {validationError && (
-                    <p className="text-red-500 mb-4">{validationError}</p>
+                    <p className="text-[#fffbfb] mb-4">{validationError}</p>
                 )}
                 <form
                     onSubmit={handleRegister}
-                    className="bg-white shadow-md rounded px-8 py-6 w-96"
+                    className="bg-[#997C70] shadow-md rounded px-8 py-6 w-96"
                 >
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
+                        <label className="block text-[#fffbfb] text-sm font-bold mb-2">
                             Хэрэглэгчийн нэр:
                         </label>
                         <input
@@ -124,7 +124,7 @@ const Register = () => {
                         />
                     </div>
                     <div className="mb-4 relative">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
+                        <label className="block text-[#fffbfb] text-sm font-bold mb-2">
                             Нууц үг:
                         </label>
                         <input
@@ -155,7 +155,7 @@ const Register = () => {
                                     className={`${
                                         requirements.length
                                             ? "text-green-500"
-                                            : "text-red-500"
+                                            : "text-[#f9c55f]"
                                     }`}
                                 >
                                     - Нууц үгийн урт 6 ба түүнээс дээш тэмдэгт
@@ -165,7 +165,7 @@ const Register = () => {
                                     className={`${
                                         requirements.uppercase
                                             ? "text-green-500"
-                                            : "text-red-500"
+                                            : "text-[#f9c55f]"
                                     }`}
                                 >
                                     - Дээд бичиглэл (A-Z) байх ёстой
@@ -174,7 +174,7 @@ const Register = () => {
                                     className={`${
                                         requirements.lowercase
                                             ? "text-green-500"
-                                            : "text-red-500"
+                                            : "text-[#f9c55f]"
                                     }`}
                                 >
                                     - Доод бичиглэл (a-z) байх ёстой
@@ -183,7 +183,7 @@ const Register = () => {
                                     className={`${
                                         requirements.number
                                             ? "text-green-500"
-                                            : "text-red-500"
+                                            : "text-[#f9c55f]"
                                     }`}
                                 >
                                     - Тоо байх ёстой
@@ -192,7 +192,7 @@ const Register = () => {
                                     className={`${
                                         requirements.specialChar
                                             ? "text-green-500"
-                                            : "text-red-500"
+                                            : "text-[#f9c55f]"
                                     }`}
                                 >
                                     - Тусгай тэмдэгт (@, #, $, %) байх ёстой
@@ -201,7 +201,7 @@ const Register = () => {
                         ) : null}
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
+                        <label className="block text-[#fffbfb] text-sm font-bold mb-2">
                             Зургийн URL:
                         </label>
                         <input
@@ -216,13 +216,13 @@ const Register = () => {
                     <div className="flex justify-between">
                         <button
                             type="submit"
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="bg-[#4c6e3b] text-[#FDF7F4] px-4 py-2 rounded hover:bg-[#3e622d] transition"
                         >
                             Бүртгүүлэх
                         </button>
                         <button
                             onClick={() => navigate("/")}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="bg-[#83685f] text-[#FDF7F4] px-4 py-2 rounded hover:bg-[#685752] transition"
                         >
                             Буцах
                         </button>
@@ -233,7 +233,7 @@ const Register = () => {
                     <span className="text-gray-700">Бүртгэлтэй юу?</span>
                     <button
                         onClick={() => navigate("/login")}
-                        className="text-blue-500 hover:underline ml-1"
+                        className="text-[#4c6e3b]  hover:underline ml-1"
                     >
                         Нэвтрэх
                     </button>

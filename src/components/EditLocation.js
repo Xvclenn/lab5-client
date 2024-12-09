@@ -75,20 +75,20 @@ const EditLocation = () => {
     if (!location) return <p>Location not found.</p>;
 
     return (
-        <div className="min-h-screen bg-gray-100 py-8 flex flex-col items-center">
-            <h1 className="text-3xl font-semibold mb-6 text-gray-700">
+        <div className="min-h-screen bg-[#FDF7F4] py-8 flex flex-col items-center">
+            <h1 className="text-3xl font-semibold mb-6 text-[#fcfcfc]">
                 Edit Location
             </h1>
             <form
                 onSubmit={handleSubmit}
-                className="bg-white p-6 shadow-md rounded-lg w-full max-w-lg"
+                className="bg-[#997C70] p-6 shadow-md rounded-lg w-full max-w-lg"
             >
                 <div className="mb-4">
-                    <label className="block text-gray-700 mb-2" htmlFor="name">
+                    <label className="block text-[#fcfcfc] mb-2" htmlFor="name">
                         Name
                     </label>
                     <input
-                        className="border rounded w-full py-2 px-3"
+                        className="border border-[#635b56] bg-[#bfb8b4] rounded w-full py-2 px-3"
                         type="text"
                         name="name"
                         value={formData.name}
@@ -98,13 +98,13 @@ const EditLocation = () => {
                 </div>
                 <div className="mb-4">
                     <label
-                        className="block text-gray-700 mb-2"
+                        className="block  text-[#fcfcfc] mb-2"
                         htmlFor="description"
                     >
                         Description
                     </label>
                     <textarea
-                        className="border rounded w-full py-2 px-3"
+                        className="border border-[#635b56] bg-[#bfb8b4] rounded w-full py-2 px-3"
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
@@ -112,11 +112,11 @@ const EditLocation = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 mb-2" htmlFor="lat">
+                    <label className="block text-[#fcfcfc] mb-2" htmlFor="lat">
                         Latitude
                     </label>
                     <input
-                        className="border rounded w-full py-2 px-3"
+                        className="border border-[#635b56] bg-[#bfb8b4] rounded w-full py-2 px-3"
                         type="text"
                         name="lat"
                         value={formData.lat}
@@ -125,11 +125,11 @@ const EditLocation = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 mb-2" htmlFor="long">
+                    <label className="block text-[#fcfcfc] mb-2" htmlFor="long">
                         Longitude
                     </label>
                     <input
-                        className="border rounded w-full py-2 px-3"
+                        className="border border-[#635b56] bg-[#bfb8b4] rounded w-full py-2 px-3"
                         type="text"
                         name="long"
                         value={formData.long}
@@ -138,11 +138,14 @@ const EditLocation = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 mb-2" htmlFor="image">
+                    <label
+                        className="block text-[#fcfcfc] mb-2"
+                        htmlFor="image"
+                    >
                         Image URL
                     </label>
                     <input
-                        className="border rounded w-full py-2 px-3"
+                        className="border border-[#635b56] bg-[#bfb8b4] rounded w-full py-2 px-3"
                         type="text"
                         name="image"
                         value={formData.image}

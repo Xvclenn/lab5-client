@@ -60,45 +60,39 @@ export const HomePage = ({ user, setUser }) => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 py-8">
-            <h1 className="text-4xl font-bold mb-4 text-slate-600">Лаб 5</h1>
+        <div className="h-[90vh] flex flex-col justify-center items-center bg-[#FDF7F4] py-8">
             {error && <p className="text-red-500 mb-4">{error}</p>}
             {user ? (
-                <div className="bg-white shadow-md rounded-lg p-6 max-w-md w-full text-center">
-                    <div className="shadow-inner pb-10">
-                        <p className="text-xl mb-4 p-5 text-slate-600">
-                            Сайн уу!, {user.user.username}.
+                <div className=" p-6 max-w-md w-full text-center">
+                    <div className="pb-10">
+                        <p className="text-3xl mb-4 p-5 text-[#483932]">
+                            Сайн уу 👋🏻 {user.user.username}.
                         </p>
-                        <img
-                            src={user.user.image}
-                            alt="User"
-                            className="mx-auto w-24 h-24 mb-4 rounded-full shadow-md"
-                        />
                     </div>
                     <div className="flex justify-center space-x-4">
                         <button
                             onClick={() =>
                                 navigate(`/users/${user.user.id}/locations`)
                             }
-                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                            className="bg-[#83685f] text-[#FDF7F4] px-4 py-2 rounded hover:bg-[#685752] transition"
                         >
                             Байршлыг харах
                         </button>
                         <button
                             onClick={handleLogout}
-                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                            className="bg-[#d43939] text-[#FDF7F4] px-4 py-2 rounded hover:bg-[#9f3939] transition"
                         >
                             Гарах
                         </button>
                     </div>
                 </div>
             ) : (
-                <div className="bg-white shadow-lg rounded-lg p-6 max-w-md w-full">
-                    <h3 className="text-lg font-semibold mb-2 text-slate-600">
+                <div className="bg-[#997C70] shadow-lg rounded-lg p-6 max-w-md w-full">
+                    <h3 className="text-lg font-semibold mb-2 text-[#FDF7F4]">
                         Хэрэглэгчийн жагсаалт
                     </h3>
                     {!selectedUser ? (
-                        <div className="mb-4 p-4 bg-white  shadow-inner rounded-lg  max-h-60 overflow-y-auto">
+                        <div className="mb-4 p-4 bg-[#bfb8b4]  shadow-inner rounded-lg ">
                             <ul className="space-y-2">
                                 {users.length > 0 ? (
                                     users.map((userItem) => (
@@ -109,7 +103,7 @@ export const HomePage = ({ user, setUser }) => {
                                                         `/users/${userItem._id}/locations`
                                                     )
                                                 }
-                                                className="w-full text-left text-blue-500 transition-colors duration-200 ease-in-out py-2 px-4 rounded-lg border border-transparent hover:border-blue-300 hover:bg-blue-50"
+                                                className="w-full text-left text-[#2d1913] transition-colors duration-200 ease-in-out py-2 px-4 rounded-lg border border-transparent hover:border-[#2d1913] hover:bg-[#c1b3a5]"
                                             >
                                                 {userItem.username}
                                             </button>
@@ -126,23 +120,9 @@ export const HomePage = ({ user, setUser }) => {
                         <></>
                     )}
 
-                    <p className="mb-4 text-center text-slate-400">
-                        Програмд ​​нэвтрэхийн тулд нэвтэрч эсвэл бүртгүүлнэ үү.
+                    <p className="mb-4 text-center text-[#FDF7F4]">
+                        Нэвтэрч эсвэл бүртгүүлнэ үү.
                     </p>
-                    <div className="flex justify-center space-x-4">
-                        <button
-                            onClick={() => navigate("/login")}
-                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-                        >
-                            Нэвтрэх
-                        </button>
-                        <button
-                            onClick={() => navigate("/register")}
-                            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
-                        >
-                            Бүртгүүлэх
-                        </button>
-                    </div>
                 </div>
             )}
         </div>

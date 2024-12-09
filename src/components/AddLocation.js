@@ -68,7 +68,7 @@ const AddLocation = () => {
     };
 
     return (
-        <div className="bg-white p-6 shadow-md rounded-lg w-full max-w-lg">
+        <div className="bg-[#FDF7F4] p-6 shadow-md rounded-lg w-full max-w-lg">
             <button
                 onClick={() => setShowInputs(!showInputs)}
                 className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition w-full mb-4"
