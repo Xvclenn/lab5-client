@@ -61,7 +61,7 @@ const AddLocation = () => {
         } catch (error) {
             console.error("Error adding location:", error);
             setErrorMessage("Байршил нэмэхэд алдаа гарлаа.");
-            navigate("/unauthorized");
+            // navigate("/unauthorized");
         } finally {
             setLoading(false);
         }

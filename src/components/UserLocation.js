@@ -45,6 +45,9 @@ const UserLocations = ({ user }) => {
     };
 
     const handleDelete = async (locationId) => {
+        if (!token) {
+            navigate("/unauthorized");
+        }
         const isConfirmed = window.confirm(
             "Та энэ байршлыг устгахдаа итгэлтэй байна уу?"
         );
@@ -67,7 +70,6 @@ const UserLocations = ({ user }) => {
             );
         } catch (error) {
             setError("Error deleting location. Please try again.");
-            navigate("/unauthorized");
             console.error("Error deleting location:", error);
         } finally {
             setDeleting(false);
@@ -113,31 +115,29 @@ const UserLocations = ({ user }) => {
                                                 </div>
                                             </Link>
                                         </div>
-                                        {user ? (
-                                            <div className="flex space-x-2">
-                                                <button
-                                                    onClick={() =>
-                                                        handleEdit(location._id)
-                                                    }
-                                                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-                                                >
-                                                    Засах
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handleDelete(
-                                                            location._id
-                                                        )
-                                                    }
-                                                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-                                                    disabled={deleting}
-                                                >
-                                                    {deleting
-                                                        ? "Deleting..."
-                                                        : "Устгах"}
-                                                </button>
-                                            </div>
-                                        ) : null}
+                                        {/* {user ? ( */}
+                                        <div className="flex space-x-2">
+                                            <button
+                                                onClick={() =>
+                                                    handleEdit(location._id)
+                                                }
+                                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                                            >
+                                                Засах
+                                            </button>
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(location._id)
+                                                }
+                                                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                                                disabled={deleting}
+                                            >
+                                                {deleting
+                                                    ? "Deleting..."
+                                                    : "Устгах"}
+                                            </button>
+                                        </div>
+                                        {/* ) : null} */}
                                     </div>
                                 </div>
                             </li>
